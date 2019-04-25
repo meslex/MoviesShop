@@ -10,23 +10,28 @@ using MoviesShop.Models;
 
 namespace MoviesShop.Controllers
 {
-    public class MoviesController : Controller
+    public class GenresController : Controller
     {
         private readonly MovieShopContex _context;
 
-        public MoviesController(MovieShopContex context)
+        public GenresController(MovieShopContex context)
         {
             _context = context;
         }
 
-        // GET: Movies
+        // GET: Genres
         public async Task<IActionResult> Index()
         {
-            var movieShopContex = _context.Movies.Include(m => m.Genre);
-            return View(await movieShopContex.ToListAsync());
+            var genre = await _context.Genres.ToListAsync();
+            foreach(Genre g in genre)
+            {
+                g.Description = g.Description.Remove(80);
+                g.Description = g.Description + " ...";
+            }
+            return View(genre);
         }
 
-        // GET: Movies/Details/5
+        // GET: Genres/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +39,39 @@ namespace MoviesShop.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies
-                .Include(m => m.Genre)
-                .FirstOrDefaultAsync(m => m.MovieId == id);
-            if (movie == null)
+            var genre = await _context.Genres
+                .FirstOrDefaultAsync(m => m.GenreId == id);
+            if (genre == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(genre);
         }
 
-        // GET: Movies/Create
+        // GET: Genres/Create
         public IActionResult Create()
         {
-            ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreId");
             return View();
         }
 
-        // POST: Movies/Create
+        // POST: Genres/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MovieId,Title,ReleaseDate,ProductionCompany,Country,Price,GenreId")] Movie movie)
+        public async Task<IActionResult> Create([Bind("GenreId,Title,Description")] Genre genre)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(movie);
+                _context.Add(genre);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreId", movie.GenreId);
-            return View(movie);
+            return View(genre);
         }
 
-        // GET: Movies/Edit/5
+        // GET: Genres/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,24 +79,22 @@ namespace MoviesShop.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies.FindAsync(id);
-            //var movie = await _context.Movies.Include(m => m.Genre).FirstOrDefaultAsync(m => m.MovieId == id);
-            if (movie == null)
+            var genre = await _context.Genres.FindAsync(id);
+            if (genre == null)
             {
                 return NotFound();
             }
-            ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "Title", movie.GenreId);
-            return View(movie);
+            return View(genre);
         }
 
-        // POST: Movies/Edit/5
+        // POST: Genres/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MovieId,Title,ReleaseDate,ProductionCompany,Country,Price,GenreId")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("GenreId,Title,Description")] Genre genre)
         {
-            if (id != movie.MovieId)
+            if (id != genre.GenreId)
             {
                 return NotFound();
             }
@@ -103,12 +103,12 @@ namespace MoviesShop.Controllers
             {
                 try
                 {
-                    _context.Update(movie);
+                    _context.Update(genre);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MovieExists(movie.MovieId))
+                    if (!GenreExists(genre.GenreId))
                     {
                         return NotFound();
                     }
@@ -119,11 +119,10 @@ namespace MoviesShop.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreId", movie.GenreId);
-            return View(movie);
+            return View(genre);
         }
 
-        // GET: Movies/Delete/5
+        // GET: Genres/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,31 +130,30 @@ namespace MoviesShop.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies
-                .Include(m => m.Genre)
-                .FirstOrDefaultAsync(m => m.MovieId == id);
-            if (movie == null)
+            var genre = await _context.Genres
+                .FirstOrDefaultAsync(m => m.GenreId == id);
+            if (genre == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            return View(genre);
         }
 
-        // POST: Movies/Delete/5
+        // POST: Genres/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var movie = await _context.Movies.FindAsync(id);
-            _context.Movies.Remove(movie);
+            var genre = await _context.Genres.FindAsync(id);
+            _context.Genres.Remove(genre);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MovieExists(int id)
+        private bool GenreExists(int id)
         {
-            return _context.Movies.Any(e => e.MovieId == id);
+            return _context.Genres.Any(e => e.GenreId == id);
         }
     }
 }

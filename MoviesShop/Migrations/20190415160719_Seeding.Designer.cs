@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoviesShop.Data;
 
 namespace MoviesShop.Migrations
 {
     [DbContext(typeof(MovieShopContex))]
-    partial class MovieShopContexModelSnapshot : ModelSnapshot
+    [Migration("20190415160719_Seeding")]
+    partial class Seeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,69 +38,6 @@ namespace MoviesShop.Migrations
                     b.HasKey("ActorId");
 
                     b.ToTable("Actors");
-
-                    b.HasData(
-                        new
-                        {
-                            ActorId = 1,
-                            Birthday = new DateTime(1971, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = "USA",
-                            Firstname = "Winona",
-                            Surname = "Ryder"
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            Birthday = new DateTime(1969, 8, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = "USA",
-                            Firstname = "Christian",
-                            Surname = "Slater"
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            Birthday = new DateTime(1959, 7, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = "USA",
-                            Firstname = "Kevin",
-                            Surname = "Spacey"
-                        },
-                        new
-                        {
-                            ActorId = 4,
-                            Birthday = new DateTime(1958, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = "USA",
-                            Firstname = "Annette",
-                            Surname = "Bening"
-                        });
-                });
-
-            modelBuilder.Entity("MoviesShop.Models.Client", b =>
-                {
-                    b.Property<int>("ClientId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Birthday");
-
-                    b.Property<string>("Country");
-
-                    b.Property<string>("Firstname");
-
-                    b.Property<string>("Surname");
-
-                    b.HasKey("ClientId");
-
-                    b.ToTable("Client");
-
-                    b.HasData(
-                        new
-                        {
-                            ClientId = 1,
-                            Birthday = new DateTime(1999, 4, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = "Ukraine",
-                            Firstname = "Oleg",
-                            Surname = "Volovoy"
-                        });
                 });
 
             modelBuilder.Entity("MoviesShop.Models.Genre", b =>
@@ -141,28 +80,6 @@ namespace MoviesShop.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("MainActors");
-
-                    b.HasData(
-                        new
-                        {
-                            ActorId = 1,
-                            MovieId = 1
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            MovieId = 1
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            MovieId = 2
-                        },
-                        new
-                        {
-                            ActorId = 4,
-                            MovieId = 2
-                        });
                 });
 
             modelBuilder.Entity("MoviesShop.Models.Movie", b =>
@@ -172,8 +89,6 @@ namespace MoviesShop.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Country");
-
-                    b.Property<string>("Description");
 
                     b.Property<string>("Director");
 
@@ -199,7 +114,6 @@ namespace MoviesShop.Migrations
                         {
                             MovieId = 1,
                             Country = "USA",
-                            Description = "In order to get out of the snobby clique that is destroying her good-girl reputation, an intelligent teen teams up with a dark sociopath in a plot to kill the cool kids.",
                             Director = "Michael Lehman",
                             GenreId = 1,
                             Price = 13m,
@@ -211,7 +125,6 @@ namespace MoviesShop.Migrations
                         {
                             MovieId = 2,
                             Country = "USA",
-                            Description = "A sexually frustrated suburban father has a mid-life crisis after becoming infatuated with his daughter's best friend.",
                             Director = "Sam Mendes",
                             GenreId = 2,
                             Price = 35m,

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoviesShop.Data;
 
 namespace MoviesShop.Migrations
 {
     [DbContext(typeof(MovieShopContex))]
-    partial class MovieShopContexModelSnapshot : ModelSnapshot
+    [Migration("20190415174540_ActorsSeeding")]
+    partial class ActorsSeeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,35 +71,6 @@ namespace MoviesShop.Migrations
                             Country = "USA",
                             Firstname = "Annette",
                             Surname = "Bening"
-                        });
-                });
-
-            modelBuilder.Entity("MoviesShop.Models.Client", b =>
-                {
-                    b.Property<int>("ClientId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Birthday");
-
-                    b.Property<string>("Country");
-
-                    b.Property<string>("Firstname");
-
-                    b.Property<string>("Surname");
-
-                    b.HasKey("ClientId");
-
-                    b.ToTable("Client");
-
-                    b.HasData(
-                        new
-                        {
-                            ClientId = 1,
-                            Birthday = new DateTime(1999, 4, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = "Ukraine",
-                            Firstname = "Oleg",
-                            Surname = "Volovoy"
                         });
                 });
 

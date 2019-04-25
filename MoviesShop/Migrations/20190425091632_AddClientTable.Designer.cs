@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoviesShop.Data;
 
 namespace MoviesShop.Migrations
 {
     [DbContext(typeof(MovieShopContex))]
-    partial class MovieShopContexModelSnapshot : ModelSnapshot
+    [Migration("20190425091632_AddClientTable")]
+    partial class AddClientTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

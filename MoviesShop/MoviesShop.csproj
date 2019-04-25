@@ -3,7 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>3a06a002-55d6-4b9b-b81f-fa7ebd936284</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20190415144347_AddSeeding.cs" />
+    <Compile Remove="Migrations\20190415144347_AddSeeding.Designer.cs" />
+    <Compile Remove="Migrations\20190415155808_AnotherSeeding.cs" />
+    <Compile Remove="Migrations\20190415155808_AnotherSeeding.Designer.cs" />
+    <Compile Remove="Migrations\20190415160203_AnotherSeeding2.cs" />
+    <Compile Remove="Migrations\20190415160203_AnotherSeeding2.Designer.cs" />
+    <Compile Remove="Migrations\20190425084204_PriceTypeChanged.cs" />
+    <Compile Remove="Migrations\20190425084204_PriceTypeChanged.Designer.cs" />
+  </ItemGroup>
 
 
   <ItemGroup>
