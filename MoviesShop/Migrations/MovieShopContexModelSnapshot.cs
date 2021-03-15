@@ -36,69 +36,6 @@ namespace MoviesShop.Migrations
                     b.HasKey("ActorId");
 
                     b.ToTable("Actors");
-
-                    b.HasData(
-                        new
-                        {
-                            ActorId = 1,
-                            Birthday = new DateTime(1971, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = "USA",
-                            Firstname = "Winona",
-                            Surname = "Ryder"
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            Birthday = new DateTime(1969, 8, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = "USA",
-                            Firstname = "Christian",
-                            Surname = "Slater"
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            Birthday = new DateTime(1959, 7, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = "USA",
-                            Firstname = "Kevin",
-                            Surname = "Spacey"
-                        },
-                        new
-                        {
-                            ActorId = 4,
-                            Birthday = new DateTime(1958, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = "USA",
-                            Firstname = "Annette",
-                            Surname = "Bening"
-                        });
-                });
-
-            modelBuilder.Entity("MoviesShop.Models.Client", b =>
-                {
-                    b.Property<int>("ClientId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Birthday");
-
-                    b.Property<string>("Country");
-
-                    b.Property<string>("Firstname");
-
-                    b.Property<string>("Surname");
-
-                    b.HasKey("ClientId");
-
-                    b.ToTable("Client");
-
-                    b.HasData(
-                        new
-                        {
-                            ClientId = 1,
-                            Birthday = new DateTime(1999, 4, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = "Ukraine",
-                            Firstname = "Oleg",
-                            Surname = "Volovoy"
-                        });
                 });
 
             modelBuilder.Entity("MoviesShop.Models.Genre", b =>
@@ -114,20 +51,6 @@ namespace MoviesShop.Migrations
                     b.HasKey("GenreId");
 
                     b.ToTable("Genres");
-
-                    b.HasData(
-                        new
-                        {
-                            GenreId = 1,
-                            Description = "Comedy is a genre of film in which the main emphasis is on humour. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect.",
-                            Title = "Comedy"
-                        },
-                        new
-                        {
-                            GenreId = 2,
-                            Description = "In film and television, drama is a genre of narrative fiction (or semi-fiction) intended to be more serious than humorous in tone. Drama of this kind is usually qualified with additional terms that specify its particular subgenre, such as police crime drama, political drama, legal drama, historical period drama, domestic drama, or comedy - drama.",
-                            Title = "Drama"
-                        });
                 });
 
             modelBuilder.Entity("MoviesShop.Models.MainActors", b =>
@@ -141,28 +64,6 @@ namespace MoviesShop.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("MainActors");
-
-                    b.HasData(
-                        new
-                        {
-                            ActorId = 1,
-                            MovieId = 1
-                        },
-                        new
-                        {
-                            ActorId = 2,
-                            MovieId = 1
-                        },
-                        new
-                        {
-                            ActorId = 3,
-                            MovieId = 2
-                        },
-                        new
-                        {
-                            ActorId = 4,
-                            MovieId = 2
-                        });
                 });
 
             modelBuilder.Entity("MoviesShop.Models.Movie", b =>
@@ -173,10 +74,6 @@ namespace MoviesShop.Migrations
 
                     b.Property<string>("Country");
 
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Director");
-
                     b.Property<int>("GenreId");
 
                     b.Property<decimal>("Price")
@@ -186,39 +83,13 @@ namespace MoviesShop.Migrations
 
                     b.Property<DateTime>("ReleaseDate");
 
-                    b.Property<string>("Title");
+                    b.Property<int>("Title");
 
                     b.HasKey("MovieId");
 
                     b.HasIndex("GenreId");
 
                     b.ToTable("Movies");
-
-                    b.HasData(
-                        new
-                        {
-                            MovieId = 1,
-                            Country = "USA",
-                            Description = "In order to get out of the snobby clique that is destroying her good-girl reputation, an intelligent teen teams up with a dark sociopath in a plot to kill the cool kids.",
-                            Director = "Michael Lehman",
-                            GenreId = 1,
-                            Price = 13m,
-                            ProductionCompany = "New World Pictures",
-                            ReleaseDate = new DateTime(1989, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Heathers"
-                        },
-                        new
-                        {
-                            MovieId = 2,
-                            Country = "USA",
-                            Description = "A sexually frustrated suburban father has a mid-life crisis after becoming infatuated with his daughter's best friend.",
-                            Director = "Sam Mendes",
-                            GenreId = 2,
-                            Price = 35m,
-                            ProductionCompany = "DreamWorks",
-                            ReleaseDate = new DateTime(1999, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "American Beauty"
-                        });
                 });
 
             modelBuilder.Entity("MoviesShop.Models.MainActors", b =>

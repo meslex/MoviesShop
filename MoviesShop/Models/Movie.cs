@@ -8,8 +8,7 @@ namespace MoviesShop.Models
     public class Movie
     {
         public int MovieId { get; set; }
-        public string Title { get; set; }
-        public string Director { get; set; }
+        public int Title { get; set; }
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
         public string ProductionCompany { get; set; }
@@ -17,7 +16,7 @@ namespace MoviesShop.Models
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
         public int GenreId { get; set; }
-        public string Description { get; set; }
+        //age
         public List<MainActors> MainActors { get; set; }
         public Genre Genre { get; set; }
     }

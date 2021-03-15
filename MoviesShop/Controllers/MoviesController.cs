@@ -78,12 +78,11 @@ namespace MoviesShop.Controllers
             }
 
             var movie = await _context.Movies.FindAsync(id);
-            //var movie = await _context.Movies.Include(m => m.Genre).FirstOrDefaultAsync(m => m.MovieId == id);
             if (movie == null)
             {
                 return NotFound();
             }
-            ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "Title", movie.GenreId);
+            ViewData["GenreId"] = new SelectList(_context.Genres, "GenreId", "GenreId", movie.GenreId);
             return View(movie);
         }
 
